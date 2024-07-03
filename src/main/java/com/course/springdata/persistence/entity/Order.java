@@ -1,7 +1,9 @@
 package com.course.springdata.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,10 +45,14 @@ public class Order {
     @Column(name = "additional_notes", length = 200)
     private String additionalNotes;
 
-    @OneToMany(mappedBy = "order")
+    //Eager means that when we want to get the Order we also want to get the Item
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItem> items;
 
-    @OneToOne
+    //Lazy is used when we don't want to get the information about this relation.
+    // To access to this information we need use some method to do that. Ex: orderItem.getCustomer.getName()
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_customer", referencedColumnName = "id_customer", insertable = false, updatable = false)
+    @JsonIgnore
     private Customer customer;
 }
