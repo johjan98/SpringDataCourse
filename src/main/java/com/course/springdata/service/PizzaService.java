@@ -41,6 +41,10 @@ public class PizzaService {
         return pizzaRepository.findAllByAvailableTrueAndDescriptionNotContainingIgnoreCase(ingredient);
     }
 
+    public int countVeganPizzas(){
+        return pizzaRepository.countByVeganTrue();
+    }
+
     public Pizza save(Pizza pizza){
         return pizzaRepository.save(pizza);
     }
