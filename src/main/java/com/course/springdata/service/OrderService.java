@@ -1,6 +1,7 @@
 package com.course.springdata.service;
 
 import com.course.springdata.persistence.entity.Order;
+import com.course.springdata.persistence.projection.OrderSummary;
 import com.course.springdata.persistence.repository.OrderRepository;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,9 @@ public class OrderService {
 
     public List<Order> getCustomerOrders(String idCustomer){
         return orderRepository.findCustomerOrders(idCustomer);
+    }
+
+    public OrderSummary getSummery(int orderId){
+        return orderRepository.findSummary(orderId);
     }
 }

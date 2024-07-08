@@ -1,6 +1,7 @@
 package com.course.springdata.web.controller;
 
 import com.course.springdata.persistence.entity.Order;
+import com.course.springdata.persistence.projection.OrderSummary;
 import com.course.springdata.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +41,10 @@ public class OrderController {
     @GetMapping("/customer/{id}")
     public ResponseEntity<List<Order>> getCustomerOrders(@PathVariable("id") String idCustomer){
         return ResponseEntity.ok(orderService.getCustomerOrders(idCustomer));
+    }
+
+    @GetMapping("/summary/{id}")
+    public ResponseEntity<OrderSummary> getSummary(@PathVariable("id") int orderId){
+        return ResponseEntity.ok(orderService.getSummery(orderId));
     }
 }
