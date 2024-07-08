@@ -3,12 +3,14 @@ package com.course.springdata.service;
 import com.course.springdata.persistence.entity.Pizza;
 import com.course.springdata.persistence.repository.PizzaPagSortRepository;
 import com.course.springdata.persistence.repository.PizzaRepository;
+import com.course.springdata.service.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -59,6 +61,11 @@ public class PizzaService {
 
     public int countVeganPizzas(){
         return pizzaRepository.countByVeganTrue();
+    }
+
+    @Transactional
+    public void updatePizza(UpdatePizzaPriceDto dto){
+        pizzaRepository.updatePizza(dto);
     }
 
     public Pizza save(Pizza pizza){
