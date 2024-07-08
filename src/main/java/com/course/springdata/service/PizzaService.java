@@ -4,6 +4,7 @@ import com.course.springdata.persistence.entity.Pizza;
 import com.course.springdata.persistence.repository.PizzaPagSortRepository;
 import com.course.springdata.persistence.repository.PizzaRepository;
 import com.course.springdata.service.dto.UpdatePizzaPriceDto;
+import com.course.springdata.service.exception.EmailApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -63,9 +64,16 @@ public class PizzaService {
         return pizzaRepository.countByVeganTrue();
     }
 
-    @Transactional
+    //Transactional helps us ensure that the operation ends correctly.
+    //If there are any errors inside the method, it can revert the changes automatically.
+    @Transactional(noRollbackFor = EmailApiException.class) //When the system throws this exception, it will not do rollback
     public void updatePizza(UpdatePizzaPriceDto dto){
         pizzaRepository.updatePizza(dto);
+        sendEmail();
+    }
+
+    private void sendEmail(){
+        throw new EmailApiException();
     }
 
     public Pizza save(Pizza pizza){
