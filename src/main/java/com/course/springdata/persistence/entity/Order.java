@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,6 +48,7 @@ public class Order {
 
     //Eager means that when we want to get the Order we also want to get the Item
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OrderBy("price DESC")
     private List<OrderItem> items;
 
     //Lazy is used when we don't want to get the information about this relation.

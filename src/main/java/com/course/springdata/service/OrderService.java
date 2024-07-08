@@ -38,4 +38,8 @@ public class OrderService {
         List<String> methods = Arrays.asList(DELIVERY, CARRYOUT);
         return orderRepository.findAllByMethodIn(methods);
     }
+
+    public List<Order> getCustomerOrders(String idCustomer){
+        return orderRepository.findCustomerOrders(idCustomer);
+    }
 }
