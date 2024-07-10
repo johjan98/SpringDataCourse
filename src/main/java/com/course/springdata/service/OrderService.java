@@ -3,7 +3,6 @@ package com.course.springdata.service;
 import com.course.springdata.persistence.entity.Order;
 import com.course.springdata.persistence.projection.OrderSummary;
 import com.course.springdata.persistence.repository.OrderRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,6 @@ public class OrderService {
 
     private static final String DELIVERY = "D";
     private static final String CARRYOUT = "C";
-    private static final String ON_SITE = "S";
 
     @Autowired
     public OrderService(OrderRepository orderRepository){

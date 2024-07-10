@@ -2,6 +2,7 @@ package com.course.springdata.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,13 +10,15 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class) //This allows to get dates about creation or modification
 @Entity
 @Table(name = "pizza")
-public class Pizza {
+public class Pizza extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
