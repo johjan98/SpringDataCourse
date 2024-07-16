@@ -1,5 +1,7 @@
 package com.course.springdata.persistence.entity;
 
+import com.course.springdata.persistence.audit.AuditPizzaListener;
+import com.course.springdata.persistence.audit.Auditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -12,13 +14,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class) //This allows to get dates about creation or modification
+@EntityListeners({AuditingEntityListener.class, AuditPizzaListener.class}) //This allows to get dates about creation or modification
 @Entity
 @Table(name = "pizza")
-public class Pizza extends Auditable{
+public class Pizza extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,4 +46,17 @@ public class Pizza extends Auditable{
 
     @Column(columnDefinition = "smallint", nullable = false)
     private Boolean available;
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "idPizza=" + idPizza +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", vegetarian=" + vegetarian +
+                ", vegan=" + vegan +
+                ", available=" + available +
+                '}';
+    }
 }

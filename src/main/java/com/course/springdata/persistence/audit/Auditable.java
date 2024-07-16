@@ -1,4 +1,4 @@
-package com.course.springdata.persistence.entity;
+package com.course.springdata.persistence.audit;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
