@@ -10,6 +10,9 @@ import org.springframework.util.SerializationUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This listener does not work with native queries, spring data repository only
+ */
 public class AuditPizzaListener {
 
     Logger logger = Logger.getLogger(getClass().getName());
