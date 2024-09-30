@@ -5,6 +5,7 @@ import com.course.springdata.persistence.projection.OrderSummary;
 import com.course.springdata.persistence.repository.OrderRepository;
 import com.course.springdata.service.dto.RandomOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,7 @@ public class OrderService {
         return orderRepository.findAllByMethodIn(methods);
     }
 
+    @Secured("ROLE_ADMIN") //Only admin role can execute this method
     public List<Order> getCustomerOrders(String idCustomer){
         return orderRepository.findCustomerOrders(idCustomer);
     }
